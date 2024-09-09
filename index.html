@@ -135,6 +135,10 @@ Sincerely,
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
+        function isMobile() {
+            return /Mobi|Android/i.test(navigator.userAgent);
+        }
+
         $(document).ready(function() {
             $('#sendEmail').click(function() {
                 var name = $('#yourName').val();
@@ -146,14 +150,19 @@ Sincerely,
                 var content = $('#emailContent').val();
                 content = content.replace(/\[Your Name\]/g, name);
 
-                var subject = 'I '+name+', Request to Remove Waqf and Implement a Modern Waqf Act';
+                var subject = 'Request to Remove Waqf and Implement a Modern Waqf Act';
                 var body = encodeURIComponent(content);
 
-                // Constructing the Gmail compose link
+                var mailtoLink = 'mailto:jpcwaqf-lss@sansad.nic.in?subject=' + encodeURIComponent(subject) + '&body=' + body;
                 var gmailLink = 'https://mail.google.com/mail/?view=cm&fs=1&to=jpcwaqf-lss@sansad.nic.in&su=' + encodeURIComponent(subject) + '&body=' + body;
 
-                // Open the Gmail link in a new tab
-                window.open(gmailLink, '_blank');
+                if (isMobile()) {
+                    // Open mailto link on mobile devices
+                    window.location.href = mailtoLink;
+                } else {
+                    // Open Gmail compose link on non-mobile devices
+                    window.location.href = gmailLink;
+                }
             });
         });
     </script>
