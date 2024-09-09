@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Waqf Request</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .email-content {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .btn-custom {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 20px;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Send Waqf Act Request</h1>
+        <div class="email-content">
+            <form id="emailForm">
+                <div class="form-group">
+                    <label for="yourName">Your Name</label>
+                    <input type="text" class="form-control" id="yourName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailContent">Content</label>
+                    <textarea class="form-control" id="emailContent" rows="10">
+Dear [Your Name],
+
+As a concerned Hindu citizen of India, I urge the government to dismantle the current Waqf system, which has become a source of misuse and unchecked authority. The outdated Waqf regulations allow for exploitation and lack transparency, posing a risk to fair governance.
+
+In the interest of justice and national integrity, it is imperative to implement a modern Waqf Act that ensures accountability, prevents misuse of power, and promotes transparency in managing Waqf assets. This step is crucial for the welfare of all citizens and the progress of our country.
+
+Sincerely,
+[Your Name]
+                    </textarea>
+                </div>
+                <button type="button" class="btn btn-custom" id="sendEmail">Send Email</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#sendEmail').click(function() {
+                var name = $('#yourName').val();
+                if (!name) {
+                    alert("Please enter your name.");
+                    return;
+                }
+
+                var content = $('#emailContent').val();
+                content = content.replace(/\[Your Name\]/g, name);
+
+                var subject = 'I '+name+', Request to Remove Waqf and Implement a Modern Waqf Act';
+                var body = encodeURIComponent(content);
+
+                // Constructing the Gmail compose link
+                var gmailLink = 'https://mail.google.com/mail/?view=cm&fs=1&to=jpcwaqf-lss@sansad.nic.in&su=' + encodeURIComponent(subject) + '&body=' + body;
+
+                // Open the Gmail link in a new tab
+                window.open(gmailLink, '_blank');
+            });
+        });
+    </script>
+
+</body>
+</html>
